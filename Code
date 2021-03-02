@@ -1,0 +1,114 @@
+import random
+HANGMAN_PICS = ['''
+   +---+
+       |
+       |
+       |
+      ===''', '''
+   +---+
+   O   |
+        |
+        |
+       ===''', '''
+    +---+
+    O   |
+    |   |
+        |
+       ===''', '''
+    +---+
+    O   |
+   /|   |
+        |
+       ===''', '''
+    +---+
+    O   |
+   /|\  |
+        |
+       ===''', '''
+    +---+
+    O   |
+   /|\  |
+   /    |
+       ===''', '''
+    +---+
+    O   |
+   /|\  |
+   / \  |
+       ===''', '''
+     .-.
+   .'   `.
+   :g g   :
+   : o    `.
+  :         ``.
+ :             `.
+:  :         .   `.
+:   :          ` . `.
+ `.. :            `. ``;
+    `:;             `:'
+       :              `.
+ jgs    `.              `.     .
+          `'`'`'`---..,___`;.-' ''']
+
+def introduction():
+   intro = "welcome to the fruit guessing game!"
+   rules = "to win you must enter the ENTIRE word all in LOWERCASE."
+   print(intro)
+   print(rules)
+wordsToGuess = ['apple', 'banana', 'crandberry', 'dragonfruit', 'elderberry', 'fig', 'grapefruit', 'honeydew', 'ilama', 'jujube', 'kiwi', 'lime', 'mango', 'nectarine', 'orange', 'peach', 'quince', 'raspberry', 'strawberry', 'tangerine', 'ugli', 'vanilla', 'watermelon', 'ximenia', 'yazu', 'zucchini']
+word = random.choice(wordsToGuess)
+answerList = list(word)
+gameDisplay = list('_'*len(answerList))
+answerLength = len( answerList )
+introduction()
+print(gameDisplay)
+wrongGuess = 0
+#Set gameStatus to True
+gameStatus = True
+#Loop while gameStatus = True
+while gameStatus == True:
+   #user input letter
+   userGuess = input("Guess a single letter: ")
+   #check if UserGuess is in AnswerList
+   if userGuess == word:
+      print("cool u won")
+      print(""" 
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$'               `$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$  
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$'                   `$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+$$$'`$$$$$$$$$$$$$'`$$$$$$!                       !$$$$$$'`$$$$$$$$$$$$$'`$$$
+$$$$  $$$$$$$$$$$  $$$$$$$                         $$$$$$$  $$$$$$$$$$$  $$$$
+$$$$. `$' \' \$`  $$$$$$$!                         !$$$$$$$  '$/ `/ `$' .$$$$
+$$$$$. !\  i  i .$$$$$$$$                           $$$$$$$$. i  i  /! .$$$$$
+$$$$$$   `--`--.$$$$$$$$$                           $$$$$$$$$.--'--'   $$$$$$
+$$$$$$L        `$$$$$^^$$                           $$^^$$$$$'        J$$$$$$
+$$$$$$$.   .'   ""~   $$$    $.                 .$  $$$   ~""   `.   .$$$$$$$
+$$$$$$$$.  ;      .e$$$$$!    $$.             .$$  !$$$$$e,      ;  .$$$$$$$$
+$$$$$$$$$   `.$$$$$$$$$$$$     $$$.         .$$$   $$$$$$$$$$$$.'   $$$$$$$$$
+$$$$$$$$    .$$$$$$$$$$$$$!     $$`$$$$$$$$'$$    !$$$$$$$$$$$$$.    $$$$$$$$
+$JT&yd$     $$$$$$$$$$$$$$$$.    $    $$    $   .$$$$$$$$$$$$$$$$     $by&TL$
+                                 $    $$    $
+                                 $.   $$   .$
+                                 `$        $'
+                                  `$$$$$$$$'
+
+      """)
+      gameStatus = False
+   if userGuess in answerList:
+      print("yep, that letter is in the answer.")
+      #add Userguess to gameDisplay
+      for i in range( answerLength ):
+         if userGuess == answerList[i]:
+            gameDisplay[i] = userGuess
+      print(gameDisplay)
+   #if userGuess not in asnwerlist +1 wrong
+   elif userGuess != word:
+      if userGuess not in answerList:
+         print( HANGMAN_PICS[wrongGuess] )
+         wrongGuess = wrongGuess + 1
+         print("No stupid! thats wrong.")
+   #if wrongGuess the same as length of hangman pics game ends
+   if wrongGuess == len(HANGMAN_PICS):
+      print("You died. game over!")
+
+      input("enter to end")
+      gameStatus = False
